@@ -21,4 +21,4 @@ sudo mv kops /usr/local/bin/kops
 export KOPS_STATE_STORE=s3://mybucket.devops4518 # o push our cluster to S3 bucket to store in cloud
 kops create cluster --name mycluster.k8s.local --zones=us-east-1a,us-east-1b --master-size=c7i-flex.large --master-count=1 --master-volume-size=20 --node-size=t3.micro --node-count=2 --node-volume-size=20 --image=ami-091138d0f0d41ff90
 kops update cluster --name mycluster.k8s.local --yes --admin
-kubectl get cluster #to check if cluster is created                                          
+kops get cluster #to check if cluster is created                                          
