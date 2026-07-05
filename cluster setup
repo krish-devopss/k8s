@@ -21,4 +21,26 @@ sudo mv kops /usr/local/bin/kops
 export KOPS_STATE_STORE=s3://mybucket.devops4518 # o push our cluster to S3 bucket to store in cloud
 kops create cluster --name mycluster.k8s.local --zones=us-east-1a,us-east-1b --master-size=c7i-flex.large --master-count=1 --master-volume-size=20 --node-size=t3.micro --node-count=2 --node-volume-size=20 --image=ami-091138d0f0d41ff90
 kops update cluster --name mycluster.k8s.local --yes --admin
-kops get cluster #to check if cluster is created                                          
+kops get cluster #to check if cluster is created 
+----------------------------------
+kops suggestion commands:
+Suggestions:
+ * list clusters with: kops get cluster
+ * edit this cluster with: kops edit cluster krish.k8s.local
+ * edit your node instance group: kops edit ig --name=krish.k8s.local nodes-us-east-1a
+ * edit your control-plane instance group: kops edit ig --name=krish.k8s.local control-plane-us-east-1a
+ * validate cluster: kops validate cluster --wait 10m
+ * list nodes: kubectl get nodes --show-labels
+ * ssh to a control-plane node: ssh -i ~/.ssh/id_rsa ubuntu@
+ * the ubuntu user is specific to Ubuntu. If not using Ubuntu please use the appropriate user based on your OS.
+ * read about installing addons at: https://kops.sigs.k8s.io/addons.
+
+To add new node to existing cluster:
+ kops get cluster
+ kops edit ig --name=krish.k8s.local nodes-us-east-1a
+ kops update cluster --name krish.k8s.local --yes --admin
+ kubectl get no
+
+
+kops delete cluster --name krish.k8s.local --yes
+
